@@ -10,7 +10,7 @@
  *
  * @author skrauss
  */
-class PostsController extends AppController{
+class PostsController extends AppController {
   public $helpers = array('Html', 'Form');
   public $components = array('Session');
   
