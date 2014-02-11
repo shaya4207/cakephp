@@ -1,6 +1,11 @@
 <h1>Blog posts</h1>
 <?php
-  echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add'));
+  if($authUser) {
+      echo 'Hi ', $this->Session->read('Auth.User.username'), '(', $this->Session->read('Auth.User.role'), ')', '! ', $this->Html->link('Log Out', array('controller' => 'users', 'action' => 'logout'));
+  } else {
+      echo $this->Html->link('Log In', array('controller' => 'users', 'action' => 'login'));
+  }
+  echo '<br/>', $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add'));
 ?>
 
 <table>
