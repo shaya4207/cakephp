@@ -1,6 +1,6 @@
 /*
-SQLyog Professional v11.31 (64 bit)
-MySQL - 5.1.50-community : Database - cakephp
+SQLyog Professional v10.51 
+MySQL - 5.1.50-community : Database - kfoodz
 *********************************************************************
 */
 
@@ -12,10 +12,6 @@ MySQL - 5.1.50-community : Database - cakephp
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`cakephp` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `cakephp`;
-
 /*Table structure for table `posts` */
 
 DROP TABLE IF EXISTS `posts`;
@@ -28,11 +24,39 @@ CREATE TABLE `posts` (
   `modified` datetime DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `posts` */
 
-insert  into `posts`(`id`,`title`,`body`,`created`,`modified`,`user_id`) values (1,'The title','This is the post body.','2014-02-10 17:25:39',NULL,NULL),(2,'A title once again','And the post body follows.','2014-02-10 17:25:39',NULL,NULL),(3,'Title strikes back','This is really exciting! Not.','2014-02-10 17:25:39',NULL,NULL);
+insert  into `posts`(`id`,`title`,`body`,`created`,`modified`,`user_id`) values (1,'The title','This is the post body.','2014-02-10 17:25:39',NULL,NULL),(2,'A title once again','And the post body follows.','2014-02-10 17:25:39',NULL,NULL),(3,'Title strikes back','This is really exciting! Not.','2014-02-10 17:25:39',NULL,NULL),(6,'sadf','dasfdsfa','2014-02-11 23:41:25','2014-02-11 23:41:25',1);
+
+/*Table structure for table `restaurants` */
+
+DROP TABLE IF EXISTS `restaurants`;
+
+CREATE TABLE `restaurants` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `state` int(5) DEFAULT NULL,
+  `zip` varchar(15) DEFAULT NULL,
+  `phone` varchar(25) DEFAULT NULL,
+  `fax` varchar(25) DEFAULT NULL,
+  `website` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `supervision` int(5) DEFAULT NULL,
+  `hours` varchar(150) DEFAULT NULL,
+  `notes` text,
+  `cuisine` int(5) DEFAULT NULL,
+  `attire` int(5) DEFAULT NULL,
+  `entered_by` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+/*Data for the table `restaurants` */
 
 /*Table structure for table `users` */
 

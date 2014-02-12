@@ -11,6 +11,7 @@
 	?>
     </head>
     <body>
+        <?php echo $this->Session->flash(); ?>
         <?php echo $this->fetch('content'); ?>
         <?php echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'); ?>
         <?php echo $this->Html->script('global'); ?>
