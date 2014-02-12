@@ -5,7 +5,7 @@
   echo $this->Form->input('name');
   echo $this->Form->input('address');
   echo $this->Form->input('city');
-  echo $this->Form->input('state');
+  echo $this->Form->input('state', array('option' => $states, 'empty' => 'Select One'));
   echo $this->Form->input('zip');
   echo $this->Form->input('phone');
   echo $this->Form->input('fax', array('type' => 'tel'));

@@ -33,6 +33,8 @@ class RestaurantsController extends AppController {
     }
     
     public function add() {
+        $this->loadModel('State');
+        $this->set('states', $this->State->find('list'));
         if($this->request->is('post')) {
             $this->Restaurant->create();
             $this->request->data['Restaurant']['entered_by'] = $this->Auth->user('id');
@@ -45,6 +47,8 @@ class RestaurantsController extends AppController {
     }
     
     public function edit($id = null) {
+        $this->loadModel('State');
+        $this->set('states', $this->State->find('list'));
         if(!$id) {
           throw new NotFoundException(__('Invalid post'));
         }

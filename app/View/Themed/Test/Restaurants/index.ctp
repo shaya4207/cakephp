@@ -1,4 +1,5 @@
-<h1>Blog posts</h1>
+<?php echo $states; ?>
+<h1>Restaurant Admin Links</h1>
 <?php
   if($authUser) {
       echo 'Hi ', $this->Session->read('Auth.User.username'), '(', $this->Session->read('Auth.User.role'), ')', '! ', $this->Html->link('Log Out', array('controller' => 'users', 'action' => 'logout'));
