@@ -1,6 +1,6 @@
 /*
-SQLyog Professional v10.51 
-MySQL - 5.1.50-community : Database - kfoodz
+SQLyog Professional v11.33 (64 bit)
+MySQL - 5.1.50-community-log : Database - cakephp
 *********************************************************************
 */
 
@@ -9,9 +9,47 @@ MySQL - 5.1.50-community : Database - kfoodz
 /*!40101 SET SQL_MODE=''*/;
 
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `attire` */
+
+DROP TABLE IF EXISTS `attire`;
+
+CREATE TABLE `attire` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `attire` */
+
+/*Table structure for table `countries` */
+
+DROP TABLE IF EXISTS `countries`;
+
+CREATE TABLE `countries` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `abbreviation` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `countries` */
+
+insert  into `countries`(`id`,`name`,`abbreviation`) values (1,'United States Of America','US');
+
+/*Table structure for table `cuisine` */
+
+DROP TABLE IF EXISTS `cuisine`;
+
+CREATE TABLE `cuisine` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `cuisine` */
+
 /*Table structure for table `posts` */
 
 DROP TABLE IF EXISTS `posts`;
@@ -54,9 +92,40 @@ CREATE TABLE `restaurants` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `restaurants` */
+
+insert  into `restaurants`(`id`,`name`,`address`,`city`,`state`,`zip`,`phone`,`fax`,`website`,`email`,`supervision`,`hours`,`notes`,`cuisine`,`attire`,`entered_by`,`created`,`modified`) values (6,'sadf','sdaf','dfsa',32,'','','','','',NULL,'','',NULL,NULL,1,'2014-02-12 13:53:42','2014-02-12 13:53:42');
+
+/*Table structure for table `states` */
+
+DROP TABLE IF EXISTS `states`;
+
+CREATE TABLE `states` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `abbreviation` varchar(100) DEFAULT NULL,
+  `country` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+
+/*Data for the table `states` */
+
+insert  into `states`(`id`,`name`,`abbreviation`,`country`) values (1,'Alabama','AL',1),(2,'Alaska','AK',1),(3,'Arizona','AZ',1),(4,'Arkansas','AR',1),(5,'California','CA',1),(6,'Colorado','CO',1),(7,'Connecticut','CT',1),(8,'Delaware','DE',1),(9,'District of Columbia','DC',1),(10,'Florida','FL',1),(11,'Georgia','GA',1),(12,'Hawaii','HI',1),(13,'Idaho','ID',1),(14,'Illinois','IL',1),(15,'Indiana','IN',1),(16,'Iowa','IA',1),(17,'Kansas','KS',1),(18,'Kentucky','KY',1),(19,'Louisiana','LA',1),(20,'Maine','ME',1),(21,'Maryland','MD',1),(22,'Massachusetts','MA',1),(23,'Michigan','MI',1),(24,'Minnesota','MN',1),(25,'Mississippi','MS',1),(26,'Missouri','MO',1),(27,'Montana','MT',1),(28,'Nebraska','NE',1),(29,'Nevada','NV',1),(30,'New Hampshire','NH',1),(31,'New Jersey','NJ',1),(32,'New Mexico','NM',1),(33,'New York','NY',1),(34,'North Carolina','NC',1),(35,'North Dakota','ND',1),(36,'Ohio','OH',1),(37,'Oklahoma','OK',1),(38,'Oregon','OR',1),(39,'Pennsylvania','PA',1),(40,'Rhode Island','RI',1),(41,'South Carolina','SC',1),(42,'South Dakota','SD',1),(43,'Tennessee','TN',1),(44,'Texas','TX',1),(45,'Utah','UT',1),(46,'Vermont','VT',1),(47,'Virginia','VA',1),(48,'Washington','WA',1),(49,'West Virginia','WV',1),(50,'Wisconsin','WI',1),(51,'Wyoming','WY',1);
+
+/*Table structure for table `supervision` */
+
+DROP TABLE IF EXISTS `supervision`;
+
+CREATE TABLE `supervision` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `logo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `supervision` */
 
 /*Table structure for table `users` */
 
@@ -77,6 +146,5 @@ CREATE TABLE `users` (
 insert  into `users`(`id`,`username`,`password`,`role`,`created`,`modified`) values (1,'skrauss','cb51d01d4a1e05e53b4732c4a8382d7f596602b3','admin','2014-02-11 14:27:51','2014-02-11 14:27:51'),(2,'test','3bdf8fb98b3a7d23c3b106efcf20ec4cc1d2fbe7','author','2014-02-11 14:30:44','2014-02-11 14:30:44');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
