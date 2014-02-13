@@ -11,9 +11,14 @@
  * @author skrauss
  */
 class CountriesController extends AppController {
-
-  public function index() {
     
-  }
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->deny();
+    }
+
+    public function index() {
+
+    }
 
 }

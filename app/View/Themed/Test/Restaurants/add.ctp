@@ -19,7 +19,7 @@
   </tr>
   <tr>
     <td align="left"><label class="input" for="state">State</label></td>
-    <td align="left"><?php echo $this->Form->input('state', array('id' => 'state')); ?></td>
+    <td align="left"><?php echo $this->Form->input('state', array('id' => 'state', 'empty' => 'Select One')); ?></td>
   </tr>
   <tr>
     <td align="left"><label class="input" for="zip">Zip</label></td>
@@ -43,7 +43,7 @@
   </tr>
   <tr>
     <td align="left"><label class="input" for="supervision">Supervision</label></td>
-    <td align="left"><?php echo $this->Form->input('supervision', array('id' => 'supervision')); ?></td>
+    <td align="left"><?php echo $this->Form->input('supervision', array('id' => 'supervision', 'empty' => 'Select One')); ?></td>
   </tr>
   <tr>
     <td align="left"><label class="input" for="hours">Hours</label></td>
@@ -55,7 +55,7 @@
   </tr>
   <tr>
     <td align="left"><label class="input" for="cuisine">Cuisine</label></td>
-    <td align="left"><?php echo $this->Form->input('cuisine', array('id' => 'cuisine')); ?></td>
+    <td align="left"><?php echo $this->Form->input('cuisine', array('id' => 'cuisine', 'multiple' => 'checkbox')); ?></td>
   </tr>
   <tr>
     <td align="left"><label class="input" for="attire">Attire</label></td>

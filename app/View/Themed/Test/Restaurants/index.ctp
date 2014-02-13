@@ -1,4 +1,3 @@
-<?php echo $states; ?>
 <h1>Restaurant Admin Links</h1>
 <?php
   if($authUser) {

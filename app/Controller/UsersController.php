@@ -17,7 +17,7 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 class UsersController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add','logout');
+        $this->Auth->allow('add', 'logout');
     }
     
     public function login() {
@@ -52,7 +52,7 @@ class UsersController extends AppController {
             $this->User->create();
             if($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('controller' => 'restaurants', 'action' => 'index'));
             }
         }
     }

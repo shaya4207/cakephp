@@ -25,13 +25,26 @@ class User extends AppModel {
                 'message' => 'A password is required'
             )
         ),
-        'role' => array(
-            'valid' => array(
-                'rule' => array('inList', array('admin', 'author')),
-                'message' => 'Please enter a valid role',
-                'allowEmpty' => false
+        'password2' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'rule' => array('equalTo', 'password'),
+                'message' => 'Passwords don\'t match'
+            )
+        ),
+        'email' => array(
+            'email',
+            'required' => array(
+                'rule' => array('notEmpty')
             )
         )
+//        'role' => array(
+//            'valid' => array(
+//                'rule' => array('inList', array('admin', 'author')),
+//                'message' => 'Please enter a valid role',
+//                'allowEmpty' => false
+//            )
+//        )
     );
     
     public function beforeSave($options = array()) {
@@ -40,5 +53,14 @@ class User extends AppModel {
             $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
         }
         return true;
+    }
+    
+    function equalTo($check, $field) {
+        $fname = '';
+        foreach($check as $key => $value) {
+          $fname = $key;
+          break;
+        }
+        return $this->data[$this->name][$field] === $this->data[$this->name][$fname];
     }
 }

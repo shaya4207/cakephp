@@ -1,8 +1,8 @@
 <?php 
 if(!isset($restaurant)) {?>
-    <h1>Restaurant List</h1>
+    <h3>Restaurant List</h3>
 
-    <table>
+    <table border="1">
         <tr>
             <th>Name</th>
             <th>Address</th>
@@ -11,7 +11,7 @@ if(!isset($restaurant)) {?>
         <?php foreach ($restaurants as $restaurant): ?>
         <tr>
             <td><?php echo $restaurant['Restaurant']['name'];?></td>
-            <td><?php echo $restaurant['Restaurant']['address'], ' ',$restaurant['Restaurant']['city'], ' ', $restaurant['Restaurant']['state'], ',', $restaurant['Restaurant']['zip']; ?></td>
+            <td><?php echo $restaurant['Restaurant']['address'], ' ',$restaurant['Restaurant']['city'], ' ', $state['State']['name'], ', ', $restaurant['Restaurant']['zip']; ?></td>
             <td>
                 <?php
                     echo $this->Html->link('Details', array('action' => 'view', $restaurant['Restaurant']['id'])), ' ';
@@ -26,17 +26,17 @@ if(!isset($restaurant)) {?>
 } else {
 ?>
     <h1><?php echo $restaurant['Restaurant']['name']; ?></h1>
-    <strong>Address:</strong> <?php echo $restaurant['Restaurant']['address'], ' ',$restaurant['Restaurant']['city'], ' ', $restaurant['Restaurant']['state'], ',', $restaurant['Restaurant']['zip']; ?><br/>
+    <strong>Address:</strong> <?php echo $restaurant['Restaurant']['address'], ' ',$restaurant['Restaurant']['city'], ' ', $state['State']['name'], ', ', $restaurant['Restaurant']['zip']; ?><br/>
     <strong>Phone:</strong> <?php echo $restaurant['Restaurant']['phone']; ?><br/>
     <strong>Fax:</strong> <?php echo $restaurant['Restaurant']['fax']; ?><br/>
     <strong>Website:</strong> <?php echo $restaurant['Restaurant']['website']; ?><br/>
     <strong>Email:</strong> <?php echo $restaurant['Restaurant']['email']; ?><br/>
-    <strong>Supervision:</strong> <?php echo $restaurant['Restaurant']['supervision']; ?><br/>
+    <strong>Supervision:</strong> <?php echo $supervision['Supervision']['name']; ?><br/>
     <strong>Hours:</strong> <?php echo $restaurant['Restaurant']['hours']; ?><br/>
     <strong>Notes:</strong> <?php echo $restaurant['Restaurant']['notes']; ?> <br/>
     <strong>Cuisine:</strong> <?php echo $restaurant['Restaurant']['cuisine']; ?><br/>
     <strong>Attire:</strong> <?php echo $restaurant['Restaurant']['attire']; ?><br/>
-    <strong>Entered By:</strong> <?php echo $restaurant['Restaurant']['entered_by']; ?><br/>
+    <strong>Entered By:</strong> <?php echo $user_id['User']['username']; ?><br/>
     <?php echo $this->Html->link('Edit', array('action' => 'edit', $restaurant['Restaurant']['id'])), ' | ', $this->Form->postLink('Delete', array('action' => 'delete', $restaurant['Restaurant']['id']), array('confirm' => 'Are you sure?')); ?>
 <?php
 }

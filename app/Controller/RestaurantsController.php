@@ -13,6 +13,11 @@
 class RestaurantsController extends AppController {
     public $helpers = array('Html', 'Form');
     public $components = array('Session');
+    
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->deny();
+    }
   
     public function index() {
         $this->set('authUser', $this->Auth->user());
@@ -20,25 +25,43 @@ class RestaurantsController extends AppController {
     }
     
     public function view($id = null) {
+        $this->loadModel('State');
+        $this->loadModel('Cuisine');
+        $this->loadModel('Supervision');
+        $this->loadModel('User');
+        $statid = $this->Restaurant->find('first', array('fields' => array('state')));
+        $supervisionid = $this->Restaurant->find('first', array('fields' => array('supervision')));
+        $userid = $this->Restaurant->find('first', array('fields' => array('entered_by')));
+        $this->set('state', $this->State->find('first', array('conditions' => array('id' => $statid['Restaurant']['state']))));
         if(is_null($id)) {
             $this->set('restaurants', $this->Restaurant->find('all'));
             $this->set('restaurantsCount', $this->Restaurant->find('count'));
         } else {
+            $this->set('cuisine', $this->Cuisine->find('all'));
+            $this->set('supervision', $this->Supervision->find('first', array('conditions' => array('id' => $supervisionid['Restaurant']['supervision']))));
+            $this->set('user_id', $this->User->find('first', array('conditions' => array('id' => $userid['Restaurant']['entered_by']))));
             $restaurant = $this->Restaurant->findById($id);
             if(!$restaurant) {
               throw new NotFoundException(__('Invalid post'));
             }
-            $this->set('restaurant', $restaurant);
+            $this->set('restaurant', $restaurant->paginate());
         }
     }
     
     public function add() {
         $this->loadModel('State');
+        $this->loadModel('Cuisine');
+        $this->loadModel('Supervision');
         $this->set('states', $this->State->find('list'));
+        $this->set('cuisines', $this->Cuisine->find('list'));
+        $this->set('supervisions', $this->Supervision->find('list'));
         if($this->request->is('post')) {
+            if(is_array($this->request->data['Restaurant']['cuisine'])) {
+                $this->request->data['Restaurant']['cuisine'] = implode(',', $this->request->data['Restaurant']['cuisine']);
+            }
             $this->Restaurant->create();
             $this->request->data['Restaurant']['entered_by'] = $this->Auth->user('id');
-            if($this->Restaurant->save($this->request->data)) {
+            if($this->Restaurant->saveAssociated($this->request->data)) {
                 $this->Session->setFlash(__('Restaurant added successfully.'));
                 $this->redirect(array('action' => 'add'));
             }
@@ -48,7 +71,9 @@ class RestaurantsController extends AppController {
     
     public function edit($id = null) {
         $this->loadModel('State');
+        $this->loadModel('Cuisine');
         $this->set('states', $this->State->find('list'));
+        $this->set('cuisines', $this->Cuisine->find('list'));
         if(!$id) {
           throw new NotFoundException(__('Invalid post'));
         }
@@ -59,6 +84,9 @@ class RestaurantsController extends AppController {
         }
 
         if($this->request->is(array('post','put'))) {
+          if(is_array($this->request->data['Restaurant']['cuisine'])) {
+              $this->request->data['Restaurant']['cuisine'] = implode(',', $this->request->data['Restaurant']['cuisine']);
+          }
           $this->Restaurant->id = $id;
           if($this->Restaurant->save($this->request->data)) {
             $this->Session->setFlash(__('The restaurant has been updated.'));
