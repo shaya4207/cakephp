@@ -20,8 +20,16 @@ class RestaurantsController extends AppController {
     }
   
     public function index() {
+        $this->loadModel('State');
+        $this->loadModel('Cuisine');
+        $this->loadModel('Supervision');
+        $this->loadModel('Country');
         $this->set('authUser', $this->Auth->user());
         $this->set('restaurantsCount', $this->Restaurant->find('count'));
+        $this->set('cuisineCount', $this->Cuisine->find('count'));
+        $this->set('supervisionCount', $this->Supervision->find('count'));
+        $this->set('statesCount', $this->State->find('count'));
+        $this->set('countriesCount', $this->Country->find('count'));
     }
     
     public function view($id = null) {
@@ -44,7 +52,7 @@ class RestaurantsController extends AppController {
             if(!$restaurant) {
               throw new NotFoundException(__('Invalid post'));
             }
-            $this->set('restaurant', $restaurant->paginate());
+            $this->set('restaurant', $restaurant);
         }
     }
     
@@ -72,8 +80,10 @@ class RestaurantsController extends AppController {
     public function edit($id = null) {
         $this->loadModel('State');
         $this->loadModel('Cuisine');
+        $this->loadModel('Supervision');
         $this->set('states', $this->State->find('list'));
         $this->set('cuisines', $this->Cuisine->find('list'));
+        $this->set('supervisions', $this->Supervision->find('list'));
         if(!$id) {
           throw new NotFoundException(__('Invalid post'));
         }

@@ -1,55 +1,50 @@
 <?php
-
-/*
+/* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
 /**
- * CakePHP CountriesController
+ * CakePHP SupervisionController
  * @author skrauss
  */
-class CountriesController extends AppController {
+class SupervisionsController extends AppController {
     
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->deny();
     }
 
-    public function index() {
+    public function index(){
 
     }
     
     public function view($id = null) {
         $this->loadModel('User');
-        $userid = $this->Country->find('first', array('fields' => array('entered_by')));
+        $userid = $this->Supervision->find('first', array('fields' => array('entered_by')));
         if(is_null($id)) {
-            $this->set('countries', $this->Country->find('all'));
+            $this->set('supervisions', $this->Supervision->find('all'));
         } else {
-            $this->set('country', $this->Country->find('all'));
-            if(!empty($userid['Country']['entered_by'])) {
-                $this->set('user_id', $this->User->find('first', array('conditions' => array('id' => $userid['Country']['entered_by']))));
-            } else {
-                $this->set('user_id', '');
-            }
-            $country = $this->Country->findById($id);
-            if(!$country) {
+            $this->set('supervision', $this->Supervision->find('all'));
+            $this->set('user_id', $this->User->find('first', array('conditions' => array('id' => $userid['Supervision']['entered_by']))));
+            $supervision = $this->Supervision->findById($id);
+            if(!$supervision) {
               throw new NotFoundException(__('Invalid post'));
             }
-            $this->set('country', $country);
+            $this->set('supervision', $supervision);
         }
     }
     
     public function add() {
         if($this->request->is('post')) {
-            $this->Country->create();
-            $this->request->data['Country']['entered_by'] = $this->Auth->user('id');
-            if($this->Country->save($this->request->data)) {
-                $this->Session->setFlash(__('Country added successfully.'));
+            $this->Supervision->create();
+            $this->request->data['Supervision']['entered_by'] = $this->Auth->user('id');
+            if($this->Supervision->save($this->request->data)) {
+                $this->Session->setFlash(__('Supervision added successfully.'));
                 $this->redirect(array('action' => 'add'));
             }
-            $this->Session->setFlash(__('Unable to add the country.'));
+            $this->Session->setFlash(__('Unable to add the supervision.'));
         }
     }
     
@@ -58,22 +53,22 @@ class CountriesController extends AppController {
           throw new NotFoundException(__('Invalid post'));
         }
 
-        $country = $this->Country->findById($id);
-        if(!$country) {
+        $supervision = $this->Supervision->findById($id);
+        if(!$cuisine) {
           throw new NotFoundException(__('Invalid post'));
         }
 
         if($this->request->is(array('post','put'))) {
-          $this->Country->id = $id;
-          if($this->Country->save($this->request->data)) {
-            $this->Session->setFlash(__('The country has been updated.'));
+          $this->Supervision->id = $id;
+          if($this->Supervision->save($this->request->data)) {
+            $this->Session->setFlash(__('The supervision has been updated.'));
             return $this->redirect(array('action' => 'view'));
           }
-          $this->Session->setFlash(__('Unable to update the country.'));
+          $this->Session->setFlash(__('Unable to update the supervision.'));
         }
 
         if(!$this->request->data) {
-          $this->request->data = $country;
+          $this->request->data = $supervision;
         }
     }
     
@@ -82,14 +77,13 @@ class CountriesController extends AppController {
           throw new MethodNotAllowedException();
         }
 
-        if($this->Country->delete($id)) {
+        if($this->Supervision->delete($id)) {
           $this->Session->setFlash(__('The supervision with id: %s has been deleted', h($id)));
-          if($this->Country->find('count') == 0) {
+          if($this->Supervision->find('count') == 0) {
               return $this->redirect(array('action' => 'index'));
           } else {
               return $this->redirect(array('action' => 'view'));
           }
         }
     }
-
 }

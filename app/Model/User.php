@@ -16,7 +16,11 @@ class User extends AppModel {
         'username' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A username is required'
+                'message' => 'A username is required',
+            ),
+            'isUnique' => array(
+                'rule' => 'isUnique',
+                'message' => 'This username is not available'
             )
         ),
         'password' => array(
@@ -34,8 +38,12 @@ class User extends AppModel {
         ),
         'email' => array(
             'email',
-            'required' => array(
+            'notEmpty' => array(
                 'rule' => array('notEmpty')
+            ),
+            'isUnique' => array(
+                'rule' => 'isUnique',
+                'message' => 'This email address is already associated with an account'
             )
         )
 //        'role' => array(

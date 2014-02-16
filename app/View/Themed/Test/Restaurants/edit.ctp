@@ -59,10 +59,6 @@
     <td align="left"><?php echo $this->Form->input('cuisine', array('id' => 'cuisine', 'multiple' => 'checkbox', 'selected' => explode(',',$this->Form->data['Restaurant']['cuisine']))); ?></td>
   </tr>
   <tr>
-    <td align="left"><label class="input" for="attire">Attire</label></td>
-    <td align="left"><?php echo $this->Form->input('attire', array('id' => 'attire')); ?></td>
-  </tr>
-  <tr>
     <td colspan="2"><?php echo $this->Form->end('Update Restaurant'); ?></td>
   </tr>
 </table>

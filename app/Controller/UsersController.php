@@ -51,7 +51,8 @@ class UsersController extends AppController {
         if($this->request->is('post')) {
             $this->User->create();
             if($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Auth->login();
+                $this->Session->setFlash(__('You have registered successfully!'));
                 return $this->redirect(array('controller' => 'restaurants', 'action' => 'index'));
             }
         }

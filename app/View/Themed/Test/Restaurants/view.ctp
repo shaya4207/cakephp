@@ -35,7 +35,6 @@ if(!isset($restaurant)) {?>
     <strong>Hours:</strong> <?php echo $restaurant['Restaurant']['hours']; ?><br/>
     <strong>Notes:</strong> <?php echo $restaurant['Restaurant']['notes']; ?> <br/>
     <strong>Cuisine:</strong> <?php echo $restaurant['Restaurant']['cuisine']; ?><br/>
-    <strong>Attire:</strong> <?php echo $restaurant['Restaurant']['attire']; ?><br/>
     <strong>Entered By:</strong> <?php echo $user_id['User']['username']; ?><br/>
     <?php echo $this->Html->link('Edit', array('action' => 'edit', $restaurant['Restaurant']['id'])), ' | ', $this->Form->postLink('Delete', array('action' => 'delete', $restaurant['Restaurant']['id']), array('confirm' => 'Are you sure?')); ?>
 <?php
